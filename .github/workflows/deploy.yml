@@ -1,4 +1,4 @@
-name: Deploy Flowave release parent
+name: Deploy Fluxnova release parent
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

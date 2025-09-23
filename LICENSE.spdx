@@ -1,7 +1,7 @@
 SPDXVersion: SPDX-2.0
 DataLicense: CC0-1.0
 Creator: finos
-PackageName: flowave-release-parent
+PackageName: fluxnova-release-parent
 PackageOriginator: finos
-PackageHomePage: https://github.com/finos/flowave-release-parent
+PackageHomePage: https://github.com/finos/fluxnova-release-parent
 PackageLicenseDeclared: Apache-2.0

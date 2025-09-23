@@ -1,18 +1,18 @@
 [![FINOS - Forming](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-forming.svg)](https://community.finos.org/docs/governance/Software-Projects/project-lifecycle)
 
-# Flowave Release Parent
+# Fluxnova Release Parent
 
-Pom which can be inherited for flowave releases defining some common release properties.
+Pom which can be inherited for fluxnova releases defining some common release properties.
 It allows to deploy to two repositories simultaneously. One is a Nexus OSS server, the other one a Nexus Enterprise server.
 It will deploy the artifacts at the end of the build to keep the window of failure small when talking to external systems.
 
 ## Usage
 
-Inherit the flowave-release-parent pom inside your project like so  
+Inherit the fluxnova-release-parent pom inside your project like so  
   
     <parent>
-      <groupId>org.camunda</groupId>
-      <artifactId>camunda-release-parent</artifactId>
+      <groupId>org.finos.fluxnova</groupId>
+      <artifactId>fluxnova-release-parent</artifactId>
       <version>${LATEST_VERSION}</version>
       <!-- do not remove empty tag - http://jira.codehaus.org/browse/MNG-4687 -->
      <relativePath />
@@ -23,9 +23,9 @@ If you have a multi-module build, just inherit in your parent pom.
 Specify the <scm> section for your project eg.
     
     <scm>
-      <url>https://github.com/camunda/MY_PROJECT_URL</url>
-      <connection>scm:git:git@github.com:camunda/MY_PROJECT_URL.git</connection>
-      <developerConnection>scm:git:git@github.com:camunda/MY_PROJECT_URL.git</developerConnection>
+      <url>https://github.com/finos/MY_PROJECT_URL</url>
+      <connection>scm:git:git@github.com:camufinosnda/MY_PROJECT_URL.git</connection>
+      <developerConnection>scm:git:git@github.com:finos/MY_PROJECT_URL.git</developerConnection>
     </scm>
 
 ## Release
@@ -120,7 +120,7 @@ This will do a release but will not push anything to the involved git repositori
 
 ## Contributing
 
-Have a look at the main Flowave [CONTRIBUTING.md](https://github.com/finos/flowave-bpm-platform/blob/main/CONTRIBUTING.md) file for our general contribution guidelines and governance policies.
+Have a look at the main Fluxnova [CONTRIBUTING.md](https://github.com/finos/fluxnova-bpm-platform/blob/main/CONTRIBUTING.md) file for our general contribution guidelines and governance policies.
 
 ## License
 

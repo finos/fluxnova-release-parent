@@ -2,14 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.finos.flowave</groupId>
-  <artifactId>flowave-release-parent</artifactId>
+  <groupId>org.finos.fluxnova</groupId>
+  <artifactId>fluxnova-release-parent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>flowave - Release Parent Pom</name>
+  <name>fluxnova - Release Parent Pom</name>
 
   <description>
-    This pom defines the required plugins and profiles to allow a flowave release build.
+    This pom defines the required plugins and profiles to allow a fluxnova release build.
     Inherit this pom when you want to release your project into the Finos GitHub package registry.
   </description>
 
@@ -179,20 +179,20 @@
   <distributionManagement>
     <repository>
       <id>github</id>
-      <name>GitHub Flowave Maven Packages</name>
-      <url>https://maven.pkg.github.com/finos/flowave-release-parent</url>
+      <name>GitHub fluxnova Maven Packages</name>
+      <url>https://maven.pkg.github.com/finos/fluxnova-release-parent</url>
     </repository>
     <snapshotRepository>
       <id>github</id>
-      <name>GitHub Flowave Maven Packages</name>
-      <url>https://maven.pkg.github.com/finos/flowave-release-parent</url>
+      <name>GitHub fluxnova Maven Packages</name>
+      <url>https://maven.pkg.github.com/finos/fluxnova-release-parent</url>
     </snapshotRepository>
   </distributionManagement>
 
   <repositories>
     <repository>
       <id>github</id>
-      <url>https://maven.pkg.github.com/finos/flowave-release-parent</url>
+      <url>https://maven.pkg.github.com/finos/fluxnova-release-parent</url>
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
@@ -207,18 +207,18 @@
   </licenses>
 
   <organization>
-    <name>Camunda Services GmbH</name>
-    <url>http://www.camunda.com</url>
+    <name>Fluxnova Community</name>
+    <url>http://fluxnova.finos.org</url>
   </organization>
 
-  <url>http://www.camunda.org</url>
+  <url>http://fluxnova.finos.org</url>
 
   <developers>
     <developer>
-      <id>camunda.org</id>
-      <name>camunda BPM Community</name>
-      <organization>camunda.org</organization>
-      <organizationUrl>http://camunda.org</organizationUrl>
+      <id>fluxnova.finos.org</id>
+      <name>Fluxnova Community</name>
+      <organization>fluxnova.finos.org</organization>
+      <organizationUrl>http://fluxnova.finos.org</organizationUrl>
     </developer>
   </developers>
 
