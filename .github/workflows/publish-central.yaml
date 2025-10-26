@@ -1,0 +1,58 @@
+name: "Publish to Maven Central"
+
+env:
+  CI_DEPLOY_USERNAME: ${{ secrets.CI_DEPLOY_USERNAME }}
+  CI_DEPLOY_PASSWORD: ${{ secrets.CI_DEPLOY_PASSWORD }}
+  CI_GPG_PASSPHRASE: ${{ secrets.CI_GPG_PASSPHRASE }}
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+# manual trigger for releasing the artifacts & autopublishing is turned off
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+
+jobs:
+  publish-central:
+    name: Publish to Maven Central
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        #added with option due to runner checking out a detached HEAD state in prepare step
+        #TODO: need to check if its happening as workflow is triggered from PR or even with workflow dispatch in main branch
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}                    # or use default GITHUB_TOKEN
+          persist-credentials: true             # allow git push from the job
+          fetch-depth: 0                        # full history so branch refs exist
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}          # checkout the branch (not a detached SHA)
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'temurin'
+          server-id: ossrh
+          server-username: CI_DEPLOY_USERNAME
+          server-password: CI_DEPLOY_PASSWORD
+          gpg-private-key: ${{ secrets.CI_GPG_PRIVATE_KEY }}
+          gpg-passphrase: CI_GPG_PASSPHRASE
+
+      - name: Configure git
+        run: |
+          git config --global committer.email "infra@finos.org"
+          git config --global committer.name "FINOS Admin"
+          git config --global author.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git config --global author.name "${GITHUB_ACTOR}"
+
+      - name: Configure GitHub authentication for Maven Release Plugin
+        run: |
+          git config --global url."https://${GH_TOKEN}@github.com/".insteadOf "https://github.com/"
+
+      - name: Prepare release
+        run: mvn -B -DpreparationGoals=clean release:prepare -Prelease -DinteractiveMode=false
+
+      - name: Perform release
+        run: mvn -B release:perform -Prelease -DinteractiveMode=false

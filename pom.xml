@@ -10,7 +10,7 @@
 
   <description>
     This pom defines the required plugins and profiles to allow a fluxnova release build.
-    Inherit this pom when you want to release your project into the Finos GitHub package registry.
+    Inherit this pom when you want to release your project into the maven central.
   </description>
 
   <properties>
@@ -40,8 +40,15 @@
     <plugin.version.war>2.4</plugin.version.war>
     <plugin.version.ear>2.9.1</plugin.version.ear>
     <plugin.version.rar>2.4</plugin.version.rar>
-    <plugin.version.gpg>1.4</plugin.version.gpg>
-    <plugin.version.release>2.5.3</plugin.version.release>
+    <plugin.version.gpg>3.2.7</plugin.version.gpg>
+    <plugin.version.release>3.1.1</plugin.version.release>
+    <plugin.version.publish>0.7.0</plugin.version.publish>
+
+    <!-- properties required for publishing to maven central-->
+    <gpg.executable>gpg</gpg.executable>
+    <publish.server.id>ossrh</publish.server.id>
+    <release.goals>install org.sonatype.central:central-publishing-maven-plugin:0.7.0:publish</release.goals>
+    <skip.source.attach>false</skip.source.attach>
   </properties>
 
   <build>
@@ -141,9 +148,20 @@
           <artifactId>maven-release-plugin</artifactId>
           <version>${plugin.version.release}</version>
           <configuration>
-            <mavenExecutorId>forked-path</mavenExecutorId>
-            <useReleaseProfile>false</useReleaseProfile>
-            <arguments>${arguments} -Psonatype-oss-release</arguments>
+            <autoVersionSubmodules>true</autoVersionSubmodules>
+            <releaseProfiles>release</releaseProfiles>
+            <goals>${release.goals}</goals>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.sonatype.central</groupId>
+          <artifactId>central-publishing-maven-plugin</artifactId>
+          <version>${plugin.version.publish}</version>
+          <extensions>true</extensions>
+          <configuration>
+            <publishingServerId>${publish.server.id}</publishingServerId>
+            <!-- TODO: its set to false to manually validate the artifacts before publishing, set it to true once successfully tested with all dependent projects-->
+            <autoPublish>false</autoPublish>
           </configuration>
         </plugin>
         <plugin>
@@ -165,6 +183,12 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-gpg-plugin</artifactId>
           <version>${plugin.version.gpg}</version>
+          <configuration>
+            <useAgent>false</useAgent>
+            <gpgArguments>
+              <arg>--digest-algo=SHA512</arg>
+            </gpgArguments>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.felix</groupId>
@@ -177,11 +201,6 @@
   </build>
 
   <distributionManagement>
-    <repository>
-      <id>github</id>
-      <name>GitHub fluxnova Maven Packages</name>
-      <url>https://maven.pkg.github.com/finos/fluxnova-release-parent</url>
-    </repository>
     <snapshotRepository>
       <id>github</id>
       <name>GitHub fluxnova Maven Packages</name>
@@ -198,6 +217,58 @@
       </snapshots>
     </repository>
   </repositories>
+
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>sign-release-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <!-- Same as attach-sources profile -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <configuration>
+              <skipSource>${skip.source.attach}</skipSource>
+            </configuration>
+            <executions>
+              <execution>
+                <id>release-attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
   <licenses>
     <license>
@@ -221,6 +292,13 @@
       <organizationUrl>http://fluxnova.finos.org</organizationUrl>
     </developer>
   </developers>
+
+  <scm>
+    <connection>scm:git:https://github.com/finos/fluxnova-release-parent.git</connection>
+    <developerConnection>scm:git:https://github.com/finos/fluxnova-release-parent.git</developerConnection>
+    <url>https://github.com/finos/fluxnova-release-parent</url>
+    <tag>HEAD</tag>
+  </scm>
 
   <issueManagement>
     <system>Jira</system>
