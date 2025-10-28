@@ -29,8 +29,5 @@ jobs:
       - name: Java setup
         uses: ./.github/actions/java-setup
 
-      - name: Set version
-        run: mvn versions:set -DnewVersion=0.0.1-SNAPSHOT -DgenerateBackupPoms=false
-
       - name: Deploy
         run: mvn -B -e clean deploy
