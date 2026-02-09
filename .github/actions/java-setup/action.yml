@@ -8,9 +8,7 @@ runs:
       with:
         java-version: 21
         distribution: 'temurin'
-        server-id: ossrh
-        server-username: ${{ env.CI_DEPLOY_USERNAME }}
-        server-password: ${{ env.CI_DEPLOY_PASSWORD }}
+        cache: 'maven'
 
     - name: Cache Maven dependencies
       uses: actions/cache@v4

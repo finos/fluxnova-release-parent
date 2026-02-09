@@ -2,8 +2,6 @@ name: Deploy Fluxnova release parent
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  CI_DEPLOY_USERNAME: ${{ secrets.CI_DEPLOY_USERNAME }}
-  CI_DEPLOY_PASSWORD: ${{ secrets.CI_DEPLOY_PASSWORD }}
 
 on:
   push:
@@ -18,8 +16,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
-    name: Build and/or Deploy
+  build:
+    name: Build and Deploy
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -31,10 +29,5 @@ jobs:
       - name: Java setup
         uses: ./.github/actions/java-setup
 
-      - name: Build
-        if: github.ref != 'refs/heads/main'
-        run: mvn -B -e clean install
-
       - name: Deploy
-        if: github.ref == 'refs/heads/main'
-        run: mvn -B -e clean deploy -s ./settings.xml
+        run: mvn -B -e clean deploy
