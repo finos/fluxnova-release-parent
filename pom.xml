@@ -4,7 +4,7 @@
 
   <groupId>org.finos.fluxnova</groupId>
   <artifactId>fluxnova-release-parent</artifactId>
-  <version>2.0.0</version>
+  <version>2.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>fluxnova - Release Parent Pom</name>
 
@@ -312,7 +312,7 @@
     <connection>scm:git:https://github.com/finos/fluxnova-release-parent.git</connection>
     <developerConnection>scm:git:https://github.com/finos/fluxnova-release-parent.git</developerConnection>
     <url>https://github.com/finos/fluxnova-release-parent</url>
-    <tag>v2.0.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <issueManagement>
