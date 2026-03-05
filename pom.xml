@@ -42,7 +42,7 @@
     <plugin.version.rar>2.4</plugin.version.rar>
     <plugin.version.gpg>3.2.7</plugin.version.gpg>
     <plugin.version.release>3.3.1</plugin.version.release>
-    <plugin.version.publish>0.7.0</plugin.version.publish>
+    <plugin.version.publish>0.10.0</plugin.version.publish>
 
     <!-- properties required for publishing to maven central-->
     <gpg.executable>gpg</gpg.executable>
