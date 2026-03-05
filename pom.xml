@@ -31,7 +31,7 @@
     <plugin.version.compiler>3.14.0</plugin.version.compiler>
     <plugin.version.jar>2.6</plugin.version.jar>
     <plugin.version.javadoc>3.10.0</plugin.version.javadoc>
-    <plugin.version.maven-bundle>5.1.9</plugin.version.maven-bundle>
+    <plugin.version.maven-bundle>6.0.2</plugin.version.maven-bundle>
 
 
     <plugin.version.deploy>3.1.4</plugin.version.deploy>
