@@ -39,7 +39,7 @@
     <plugin.version.ejb>2.4</plugin.version.ejb>
     <plugin.version.war>2.4</plugin.version.war>
     <plugin.version.ear>2.10.1</plugin.version.ear>
-    <plugin.version.rar>2.4</plugin.version.rar>
+    <plugin.version.rar>3.1.0</plugin.version.rar>
     <plugin.version.gpg>3.2.7</plugin.version.gpg>
     <plugin.version.release>3.3.1</plugin.version.release>
     <plugin.version.publish>0.7.0</plugin.version.publish>
