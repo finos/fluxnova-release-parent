@@ -34,7 +34,7 @@
     <plugin.version.maven-bundle>5.1.9</plugin.version.maven-bundle>
 
 
-    <plugin.version.deploy>3.1.4</plugin.version.deploy>
+    <plugin.version.deploy>3.2.0</plugin.version.deploy>
     <plugin.version.assembly>2.6</plugin.version.assembly>
     <plugin.version.ejb>2.4</plugin.version.ejb>
     <plugin.version.war>2.4</plugin.version.war>
